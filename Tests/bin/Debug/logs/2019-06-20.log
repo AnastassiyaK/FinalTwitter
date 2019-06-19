@@ -1,0 +1,17 @@
+2019-06-20 00:46:05.4817 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-20 00:46:10.9334 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-20 00:46:12.1357 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: epamJune6
+2019-06-20 00:46:14.7483 | DEBUG | Core.FileLogs.FileLog | User is successfully logged in
+2019-06-20 00:46:15.2460 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-20 00:46:17.9867 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-20 00:46:21.7751 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-20 00:46:22.1469 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: wrongpassword
+2019-06-20 00:46:33.5227 | DEBUG | Core.FileLogs.FileLog | User is not logged in
+2019-06-20 00:46:33.5527 | DEBUG | Core.FileLogs.FileLog | Incorrect credentials were entered.LogIn page is not opened
+2019-06-20 00:46:34.3872 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-20 00:46:36.7669 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-20 00:46:42.2745 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-20 00:46:42.5683 | DEBUG | Core.FileLogs.FileLog | Email: wrongemail, password: wrongpassword
+2019-06-20 00:46:53.9205 | DEBUG | Core.FileLogs.FileLog | User is not logged in
+2019-06-20 00:46:53.9539 | DEBUG | Core.FileLogs.FileLog | Incorrect credentials were entered.LogIn page is not opened
+2019-06-20 00:46:54.5357 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly

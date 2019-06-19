@@ -1,0 +1,14 @@
+2019-06-14 21:58:32.7815 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated succseefully
+2019-06-14 21:58:33.3003 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed succseefully
+2019-06-14 22:12:50.7187 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-14 22:12:55.9841 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-14 22:13:47.1200 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-14 22:14:16.2495 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-14 22:38:55.4810 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-14 22:39:00.8322 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-14 22:53:26.7056 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-14 22:53:30.5837 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-14 23:55:53.9456 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-14 23:55:59.3638 | DEBUG | Core.FileLogs.FileLog | https://twitter.com/login is successfully opened
+2019-06-14 23:56:00.0504 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-14 23:56:00.3033 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly

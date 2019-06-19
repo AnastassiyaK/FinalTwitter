@@ -1,0 +1,36 @@
+2019-06-16 23:12:05.6545 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-16 23:12:09.3250 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-16 23:12:09.7457 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: selenium
+2019-06-16 23:12:11.1909 | DEBUG | Core.FileLogs.FileLog | User is not logged in
+2019-06-16 23:12:11.6149 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-16 23:13:09.7056 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-16 23:13:14.9924 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-16 23:13:15.2343 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: selenium
+2019-06-16 23:14:07.9777 | DEBUG | Core.FileLogs.FileLog | User is successfully logged in
+2019-06-16 23:14:25.0425 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-16 23:15:27.4647 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-16 23:15:31.6708 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-16 23:15:31.8766 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: selenium
+2019-06-16 23:15:33.2725 | DEBUG | Core.FileLogs.FileLog | User is not logged in
+2019-06-16 23:15:33.7004 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-16 23:28:27.2290 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-16 23:28:30.6539 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-16 23:28:30.8798 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: selenium
+2019-06-16 23:28:32.9720 | DEBUG | Core.FileLogs.FileLog | User is successfully logged in
+2019-06-16 23:28:33.3815 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-16 23:30:43.3966 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-16 23:30:47.1572 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-16 23:30:47.4400 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-16 23:30:49.9776 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-16 23:30:54.3137 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-16 23:30:54.5766 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: selenium
+2019-06-16 23:30:56.7806 | DEBUG | Core.FileLogs.FileLog | User is successfully logged in
+2019-06-16 23:30:57.0495 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-16 23:41:07.6568 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-16 23:41:10.8368 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-16 23:41:11.0767 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-16 23:41:13.4694 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-16 23:41:17.4939 | DEBUG | Core.FileLogs.FileLog | LogIn page is opened
+2019-06-16 23:41:17.7618 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: selenium
+2019-06-16 23:41:20.3645 | DEBUG | Core.FileLogs.FileLog | User is successfully logged in
+2019-06-16 23:41:20.6264 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
