@@ -32,6 +32,7 @@ namespace Business.PageObjects
         private const string seeNewTweetBarPath = "//div[contains(@class,'new-tweets-bar')]";
         private const string allTweetsSectionPath = "//div[contains(@aria-label,'Home')]";
         private const string lastTweetsPath ="//div[contains(@aria-label,'Conversation')]//child::span";
+        private const string singleTweetPath = "//div[@lang='et']";
 
         //home link on the page
         [FindsBy(How = How.XPath, Using = homeLinkPath)]
@@ -66,7 +67,9 @@ namespace Business.PageObjects
         //last tweet on page opened in new  window
         [FindsBy(How = How.XPath, Using = lastTweetsPath)]
         private IWebElement lastTweets;
-        
+        //single tweet 
+        [FindsBy(How = How.XPath, Using = singleTweetPath)]
+        private IWebElement singleTweet; 
 
         //}
         //public bool OnPage()
@@ -123,8 +126,8 @@ namespace Business.PageObjects
             //allTweetsSection;
             IList<IWebElement> list = allTweetsSection.FindElements(By.TagName("article"));
             list[0].Click();
-
-            if (message == list[0].Text)
+            Extensions.WaitedForElement(BrowserFactory.Driver, singleTweet, 5); 
+            if (message == singleTweet.Text)
             {
                 log.WriteMessagesInFile($"The {message} was sent as tweet and the last tweet is .Checking for last tweet was successfull");
 
