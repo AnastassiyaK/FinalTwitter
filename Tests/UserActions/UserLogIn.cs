@@ -58,12 +58,12 @@ namespace Tests.UserActions
         [Order(3)]
         [Description("Log in to twitter account with 3 pair of credentials")]
         [TestCaseSource("Cred")]
-        public void CheckLogInAfterClosingAllTabs(string login, string password)
+        public void CheckLogInAfterClosingAllTabs(string method)
         {
             bool pageIsOpened = BasePageObject.Login.LogInPageOpened();
             if (pageIsOpened)
             {
-                BasePageObject.Login.SignIn("LogIn");
+                BasePageObject.Login.SignIn(method);
                 Assert.IsTrue(BasePageObject.Main.IsLoggedIn(), "User is not logged in");
                 BasePageObject.Main.ReopenBrowser();
                 Assert.IsTrue(BasePageObject.Main.IsLoggedIn(), "User is not logged in");
