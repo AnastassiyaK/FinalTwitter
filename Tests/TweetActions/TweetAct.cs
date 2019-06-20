@@ -31,14 +31,20 @@ namespace Tests.TweetActions
         [Order(1)]
         [Description("Sending tweets with text, text and correct link, text and incorrect link")]
         [TestCaseSource("Tweets")]
-        public void SendTweetsWithText(string message)
+        public void SendTweets(string message,string item)
         {
-            BasePageObject.Main.SendTweetWithText(message);
+            BasePageObject.Main.SendTweet(message,item);
             //string lastTweet = "kotik";
             Assert.IsTrue(BasePageObject.Main.IsLastTweet(message),$"The last tweet is not {message}");
         }
         public static object[] Tweets =
-        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}" };
+        {
+        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","" },
+        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","gif" }
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","pic" }
+        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","comment" }
+        };
+
         //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}"};
 
         

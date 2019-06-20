@@ -53,7 +53,6 @@ E:\Epam_training\GitProjectFinal\Tests\bin\Debug\Tests.dll.config
 E:\Epam_training\GitProjectFinal\Tests\obj\Debug\Tests.Properties.Resources.resources
 E:\Epam_training\GitProjectFinal\Tests\obj\Debug\Tests.csproj.GenerateResource.cache
 E:\Epam_training\GitProjectFinal\Tests\bin\Debug\NLog.config
-E:\Epam_training\GitProjectTwitter\Tests\bin\Debug\NLog.config
 E:\Epam_training\GitProjectTwitter\Tests\bin\Debug\NUnit3.TestAdapter.dll
 E:\Epam_training\GitProjectTwitter\Tests\bin\Debug\NUnit3.TestAdapter.pdb
 E:\Epam_training\GitProjectTwitter\Tests\bin\Debug\nunit.engine.dll
@@ -83,3 +82,4 @@ E:\Epam_training\GitProjectTwitter\Tests\obj\Debug\Tests.csproj.CoreCompileInput
 E:\Epam_training\GitProjectTwitter\Tests\obj\Debug\Tests.csproj.CopyComplete
 E:\Epam_training\GitProjectTwitter\Tests\obj\Debug\Tests.dll
 E:\Epam_training\GitProjectTwitter\Tests\obj\Debug\Tests.pdb
+E:\Epam_training\GitProjectTwitter\Tests\bin\Debug\NLog.config

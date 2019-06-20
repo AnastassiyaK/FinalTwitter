@@ -68,3 +68,18 @@
 2019-06-20 01:21:58.0307 | DEBUG | Core.FileLogs.FileLog | The Test Tweet Thu, 20 Jun 2019 01h21m05s was sent as tweet and the last tweet is .Checking for last tweet was successfull
 2019-06-20 01:21:59.2160 | DEBUG | Core.FileLogs.FileLog | User was signed out
 2019-06-20 01:21:59.9405 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-20 22:07:01.6242 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-20 22:07:12.5975 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: epamJune6
+2019-06-20 22:07:19.5451 | DEBUG | Core.FileLogs.FileLog | Sending Test Tweet Thu, 20 Jun 2019 22h06m52s as a new tweet
+2019-06-20 22:38:55.0961 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-20 22:39:00.1149 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: epamJune6
+2019-06-20 22:39:06.1316 | DEBUG | Core.FileLogs.FileLog | Sending Test Tweet Thu, 20 Jun 2019 22h38m51s as a new tweet
+2019-06-20 22:39:17.9625 | DEBUG | Core.FileLogs.FileLog | The Test Tweet Thu, 20 Jun 2019 22h38m51s was sent as tweet and the last tweet is .Checking for last tweet was successfull
+2019-06-20 22:39:18.7094 | DEBUG | Core.FileLogs.FileLog | User was signed out
+2019-06-20 22:39:19.2185 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-20 22:41:46.7948 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-20 22:41:53.2723 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: epamJune6
+2019-06-20 22:42:01.0911 | DEBUG | Core.FileLogs.FileLog | Sending Test Tweet Thu, 20 Jun 2019 22h41m43s as a new tweet
+2019-06-20 23:58:56.2626 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-20 23:59:22.8257 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: epamJune6
+2019-06-20 23:59:43.7668 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly

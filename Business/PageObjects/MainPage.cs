@@ -2,6 +2,7 @@
 using Core.FileLogs;
 using Core.WebDrivers;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -20,22 +21,34 @@ namespace Business.PageObjects
         private static readonly FileLog log = new FileLog();
 
         private const string newTweetIputPath = "//span[contains(text(),'happening?')]";
+        private const string popUpNewTweetPath = "//div[@aria-labelledby='modal-header']";
         private const string newTweetTextBoxPath = "//div[@data-testid='tweetTextarea_0']";  
-        private const string sendTweetButtonPath = "//div[@data-testid='tweetButton']";
+        private const string sendTweetBtnPath = "//div[@data-testid='tweetButton']";
         private const string newPictureInputPath = "//div[contains(@id,'Tweetstorm-tweet-box-0')]/descendant::input[@class='file-input js-tooltip']";
         //private const string newTweetModalWindowPath = "//div[contains(@class,'js-new-items-bar-container')]";
         //private const string firstTweetOnPagePath = "(//div[@class='js-tweet-text-container'])[1]";
         private const string userIconPath = "//div[contains(@aria-label,'Profile')]";
-        private const string signOutButtonPath = "//a[@href='/logout']";
+        private const string signOutBtnPath = "//a[@href='/logout']";
         private const string homeLinkPath = "//nav[@aria-label='Primary']";
         private const string popUpLogOutPath= "//div[@data-testid='confirmationSheetConfirm']";
         private const string seeNewTweetBarPath = "//div[contains(@class,'new-tweets-bar')]";
         private const string allTweetsSectionPath = "//div[contains(@aria-label,'Home')]";
         private const string lastTweetsPath ="//div[contains(@aria-label,'Conversation')]//child::span";
-        private const string singleTweetPath = "//div[@lang='et']";
-
+        private const string singleTweetPath = "//div[@lang]";
+        ////div[contains(@aria-label,'photos')]//child::div//*[@d]
+        private const string addPicBtnPath = "//div[contains(@aria-label,'photos')]";
+        private const string addGifBtnPath = "//div[contains(@aria-label,'GIF')] ";
+        private const string confirmGifBtnPath = "//span[text()='Add']";
+        private const string searchFieldGifPath = "//form[contains(@aria-label,'Search for GIFs')]//child::input";
+        private const string firstGifBtnPath = "//input[@aria-label='Auto-play GIFs']//following::img[1]";
+        private const string addCommentBtnPath = "//div[@aria-label='Add Tweet']";
+        private const string optionMoreTweetBtnPath = "//div[@data-testid='caret']";
+        private const string deleteTweetBtnPath = "//span[text()='Delete']";
+        private const string confirmDeleteTweetBtnPath = "//div[@data-testid='confirmationSheetConfirm']";
+        private const string sentTweetPicPath="//div[@data-testid='tweetTextarea_0']//following::img[1]";
+        private const string sentGifPath = "//div[@data-testid='tweetTextarea_0']//following::video[1]";
         //home link on the page
-        [FindsBy(How = How.XPath, Using = homeLinkPath)]
+         [FindsBy(How = How.XPath, Using = homeLinkPath)]
         private IWebElement homeLink;       
         //button to enter text
         [FindsBy(How = How.XPath, Using = newTweetIputPath)]
@@ -44,7 +57,7 @@ namespace Business.PageObjects
         [FindsBy(How = How.XPath, Using = newTweetTextBoxPath)]
         private IWebElement newTweetTextBox;
         //button to send tweet
-        [FindsBy(How = How.XPath, Using = sendTweetButtonPath)]
+        [FindsBy(How = How.XPath, Using = sendTweetBtnPath)]
         private IWebElement sendTweetBtn;
         //input to send a pic
         [FindsBy(How = How.XPath, Using = newPictureInputPath)]
@@ -53,7 +66,7 @@ namespace Business.PageObjects
         [FindsBy(How = How.XPath, Using = userIconPath)]
         private IWebElement currentUserLink;
         //sign out button
-        [FindsBy(How = How.XPath, Using = signOutButtonPath)]
+        [FindsBy(How = How.XPath, Using = signOutBtnPath)]
         private IWebElement userSignOutBtn;
         //modal window for sign out    
         [FindsBy(How = How.XPath, Using = popUpLogOutPath)]
@@ -69,8 +82,40 @@ namespace Business.PageObjects
         private IWebElement lastTweets;
         //single tweet 
         [FindsBy(How = How.XPath, Using = singleTweetPath)]
-        private IWebElement singleTweet; 
-
+        private IWebElement singleTweet;
+        //send pic button
+        [FindsBy(How = How.XPath, Using = addPicBtnPath)]
+        private IWebElement addPicBtn;
+        //send gif button
+        [FindsBy(How = How.XPath, Using = addGifBtnPath)]
+        private IWebElement addGifBtn;
+        //search gifs field
+        [FindsBy(How = How.XPath, Using =searchFieldGifPath)]
+        private IWebElement searchFieldGif;
+        //first gif 
+        [FindsBy(How = How.XPath, Using = firstGifBtnPath)]
+        private IWebElement firstGifBtn;
+        //add comment 
+        [FindsBy(How = How.XPath, Using = addCommentBtnPath)]
+        private IWebElement addCommentBtn;
+        //option more on tweet
+        [FindsBy(How = How.XPath, Using = optionMoreTweetBtnPath)]
+        private IWebElement optionMoreTweetBtn;
+        //delete btn in tweet menu
+        [FindsBy(How = How.XPath, Using = deleteTweetBtnPath)]
+        private IWebElement deleteTweetBtn;
+        //confirm delete btn in tweet menu
+        [FindsBy(How = How.XPath, Using = confirmDeleteTweetBtnPath)]
+        private IWebElement confirmDeleteTweetBtn;
+        //sent pic 
+        [FindsBy(How = How.XPath, Using = sentTweetPicPath)]
+        private IWebElement sentTweetPicField;
+        //sent gif
+        [FindsBy(How = How.XPath, Using = sentGifPath)]
+        private IWebElement sentGifField;        
+        //confirm gif 
+        [FindsBy(How = How.XPath, Using = confirmGifBtnPath)]
+        private IWebElement confirmGifBtn;
         //}
         //public bool OnPage()
         //{
@@ -106,7 +151,7 @@ namespace Business.PageObjects
             userSignOutPopUpBtn.Click();
             log.WriteMessagesInFile("User was signed out");
         }
-        public void SendTweetWithText(string message)
+        public void SendTweet(string message,string item)
         {
             Extensions.WaitedForElement(BrowserFactory.Driver, newTweetInput, 5);
             newTweetInput.Click();
@@ -114,9 +159,41 @@ namespace Business.PageObjects
             Extensions.WaitedForElement(BrowserFactory.Driver, newTweetTextBox, 5);
             newTweetTextBox.Click();
             newTweetTextBox.SendKeys(message);
-            log.WriteMessagesInFile($"Sending {message} as a new tweet");
+            switch (item)
+            {
+                case "pic":
+                    Actions builder = new Actions(BrowserFactory.Driver);
+                    builder.SendKeys(addPicBtn, "path").Perform();
+                    BrowserFactory.SwitchToElement();
+                    builder.SendKeys(@"E:\Epam_training\picForTest.jpg");
+                    builder.SendKeys(Keys.Enter);
+                    // addPicBtn.SendKeys(System.IO.Path.GetFullPath(@"E:\Epam_training\picForTest.jpg"));
+                    Extensions.WaitedForElement(BrowserFactory.Driver, sentTweetPicField, 5);
+                   
+                    break;
+                case "gif":
+                    addGifBtn.Click();
+                    Extensions.WaitedForElement(BrowserFactory.Driver, searchFieldGif, 5);
+                    searchFieldGif.Click();
+                    searchFieldGif.SendKeys("dog");
+                    searchFieldGif.SendKeys(Keys.Enter);
+                    Extensions.WaitedForElement(BrowserFactory.Driver, firstGifBtn, 5);
+                    firstGifBtn.Click();
+                    confirmGifBtn.Click();
+                    Extensions.WaitedForElement(BrowserFactory.Driver, sentGifField, 5);
+                    break;
+                case "comment":
+                    addPicBtn.SendKeys(@"E:\Epam_training.picForTest.jpg");
+                    Extensions.WaitedForElement(BrowserFactory.Driver, sentTweetPicField, 5);
+                    break;
+                default:                    
+                    log.WriteMessagesInFile($"Sending {message} as a new tweet");
+                    break;
+
+            }
+           
             sendTweetBtn.Click();
-            Extensions.WaitedForElement(BrowserFactory.Driver, seeNewTweetBarBtn, 10);
+            Extensions.WaitedForElementDisapear(BrowserFactory.Driver, By.XPath(popUpNewTweetPath), 10);
         }
         public bool IsLastTweet(string message)
         {
