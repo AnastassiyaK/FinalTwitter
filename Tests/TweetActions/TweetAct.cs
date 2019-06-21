@@ -35,7 +35,7 @@ namespace Tests.TweetActions
         [TestCaseSource("Tweets")]
         public void SendTweets(string message,string item)
         {
-            if (!(item == "several pics"))
+            if (!(item == "several pics") && !(item == "pic"))
             {
                 BasePageObject.Main.SendTweet(message, item, null);
                                
@@ -44,18 +44,36 @@ namespace Tests.TweetActions
             {
                 var fileName = ConfigurationManager.AppSettings["TweetPicPath"];
                 string[] images = Directory.GetFiles(fileName, "*.jpg");
-                BasePageObject.Main.SendTweet(message, item, images);
+                if (images.Count()!=0)
+                {
+                    switch (item)
+                    {
+                        case "pic":
+                            string[] image = new string[] { $"images.First()" };
+                            BasePageObject.Main.SendTweet(message, item, image);
+                            break;
+                        default:
+                            BasePageObject.Main.SendTweet(message, item, images);
+                            break;
+
+                    }
+
+                }   
+                            
+                
 
             }
             Assert.IsTrue(BasePageObject.Main.IsLastTweet(message), $"The last tweet is not {message}");
         }
         public static object[] Tweets =
         {
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","" },
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","gif" }
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "pic" }
-        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "several pics" }
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","comment" }
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","" },
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","gif" },
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "pic" },
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "several pics" },
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","comment" },
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","correct link" },
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","incorrect link" }
         };
 
         //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}"};

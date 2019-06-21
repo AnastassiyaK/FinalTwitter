@@ -22,11 +22,10 @@ namespace Business.PageObjects
 
         private const string newTweetIputPath = "//span[contains(text(),'happening?')]";
         private const string popUpNewTweetPath = "//div[@aria-labelledby='modal-header']";
-        private const string newTweetTextBoxPath = "//div[@data-testid='tweetTextarea_0']";  
+        private const string newTweetTextBoxPath = "//div[@data-testid='tweetTextarea_0']";
+        private const string firstCommentTextBoxPath = "//div[@data-testid='tweetTextarea_1']";
         private const string sendTweetBtnPath = "//div[@data-testid='tweetButton']";
         private const string newPictureInputPath = "//div[contains(@id,'Tweetstorm-tweet-box-0')]/descendant::input[@class='file-input js-tooltip']";
-        //private const string newTweetModalWindowPath = "//div[contains(@class,'js-new-items-bar-container')]";
-        //private const string firstTweetOnPagePath = "(//div[@class='js-tweet-text-container'])[1]";
         private const string userIconPath = "//div[contains(@aria-label,'Profile')]";
         private const string signOutBtnPath = "//a[@href='/logout']";
         private const string homeLinkPath = "//nav[@aria-label='Primary']";
@@ -35,8 +34,6 @@ namespace Business.PageObjects
         private const string allTweetsSectionPath = "//div[contains(@aria-label,'Home')]";
         private const string lastTweetsPath ="//div[contains(@aria-label,'Conversation')]//child::span";
         private const string singleTweetPath = "//div[@lang]";
-        ////div[contains(@aria-label,'photos')]//child::div//*[@d]
-        /////div[contains(@aria-label,'photos')]
         private const string addPicBtnPath = "//div[contains(@aria-label,'photos')]//following::input[1]";
         private const string addGifBtnPath = "//div[contains(@aria-label,'GIF')] ";
         private const string confirmGifBtnPath = "//span[text()='Add']";
@@ -49,6 +46,7 @@ namespace Business.PageObjects
         private const string sentTweetPicPath="//div[@data-testid='tweetTextarea_0']//following::img[1]";
         private const string sentGifPath = "//div[@data-testid='tweetTextarea_0']//following::video[1]";
         private const string alertNewTweetPath = "//div[@data-testid='toast']";
+
         //home link on the page
         [FindsBy(How = How.XPath, Using = homeLinkPath)]
         private IWebElement homeLink;       
@@ -58,6 +56,9 @@ namespace Business.PageObjects
         //new tweet area
         [FindsBy(How = How.XPath, Using = newTweetTextBoxPath)]
         private IWebElement newTweetTextBox;
+        //first comment to the tweet area
+        [FindsBy(How = How.XPath, Using = firstCommentTextBoxPath)]
+        private IWebElement firstCommentTextBox;
         //button to send tweet
         [FindsBy(How = How.XPath, Using = sendTweetBtnPath)]
         private IWebElement sendTweetBtn;
@@ -173,7 +174,7 @@ namespace Business.PageObjects
                     //BrowserFactory.SwitchToElement();
                     //builder.SendKeys(@"E:\Epam_training\picForTest.jpg");
                     //builder.SendKeys(Keys.Enter);
-                    addPicBtn.SendKeys(System.IO.Path.GetFullPath(@"E:\Epam_training\picForTest.jpg"));
+                    addPicBtn.SendKeys(System.IO.Path.GetFullPath(@"E:\Epam_training\GitProjectTwitter\Tests\PicsForTweet\picForTest.jpg"));
                     Extensions.WaitedForElement(BrowserFactory.Driver, sentTweetPicField, 5);
                    
                     break;
@@ -187,9 +188,7 @@ namespace Business.PageObjects
                             Extensions.WaitedForElement(BrowserFactory.Driver, sentTweetPicField, 5);
                         }
                         
-                    }
-                   
-                    
+                    }                
                     break;
                 case "gif":
                     addGifBtn.Click();
@@ -203,7 +202,9 @@ namespace Business.PageObjects
                     Extensions.WaitedForElement(BrowserFactory.Driver, sentGifField, 5);
                     break;
                 case "comment":
-                    addPicBtn.SendKeys(@"E:\Epam_training.picForTest.jpg");
+                    addCommentBtn.Click();
+                    firstCommentTextBox.Click();
+                    firstCommentTextBox.SendKeys(message);
                     Extensions.WaitedForElement(BrowserFactory.Driver, sentTweetPicField, 5);
                     break;
                 default:                    
