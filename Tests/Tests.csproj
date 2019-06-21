@@ -81,6 +81,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PicsForTweet\picForTest.jpg" />
+    <Content Include="PicsForTweet\picForTest2.jpg" />
     <Content Include="Screenshots\Mon, 17 Jun 2019 22h15m37s span.jpg" />
     <Content Include="Screenshots\Mon, 17 Jun 2019 22h25m25s span.jpg" />
     <Content Include="Screenshots\Mon, 17 Jun 2019 22h29m47s span.jpg" />

@@ -36,7 +36,8 @@ namespace Business.PageObjects
         private const string lastTweetsPath ="//div[contains(@aria-label,'Conversation')]//child::span";
         private const string singleTweetPath = "//div[@lang]";
         ////div[contains(@aria-label,'photos')]//child::div//*[@d]
-        private const string addPicBtnPath = "//div[contains(@aria-label,'photos')]";
+        /////div[contains(@aria-label,'photos')]
+        private const string addPicBtnPath = "//div[contains(@aria-label,'photos')]//following::input[1]";
         private const string addGifBtnPath = "//div[contains(@aria-label,'GIF')] ";
         private const string confirmGifBtnPath = "//span[text()='Add']";
         private const string searchFieldGifPath = "//form[contains(@aria-label,'Search for GIFs')]//child::input";
@@ -47,8 +48,9 @@ namespace Business.PageObjects
         private const string confirmDeleteTweetBtnPath = "//div[@data-testid='confirmationSheetConfirm']";
         private const string sentTweetPicPath="//div[@data-testid='tweetTextarea_0']//following::img[1]";
         private const string sentGifPath = "//div[@data-testid='tweetTextarea_0']//following::video[1]";
+        private const string alertNewTweetPath = "//div[@data-testid='toast']";
         //home link on the page
-         [FindsBy(How = How.XPath, Using = homeLinkPath)]
+        [FindsBy(How = How.XPath, Using = homeLinkPath)]
         private IWebElement homeLink;       
         //button to enter text
         [FindsBy(How = How.XPath, Using = newTweetIputPath)]
@@ -116,6 +118,10 @@ namespace Business.PageObjects
         //confirm gif 
         [FindsBy(How = How.XPath, Using = confirmGifBtnPath)]
         private IWebElement confirmGifBtn;
+        //alert new tweet was sent
+        [FindsBy(How = How.XPath, Using = alertNewTweetPath)]
+        private IWebElement alertNewTweetAlert;
+        
         //}
         //public bool OnPage()
         //{
@@ -151,7 +157,7 @@ namespace Business.PageObjects
             userSignOutPopUpBtn.Click();
             log.WriteMessagesInFile("User was signed out");
         }
-        public void SendTweet(string message,string item)
+        public void SendTweet(string message,string item,string [] pics)
         {
             Extensions.WaitedForElement(BrowserFactory.Driver, newTweetInput, 5);
             newTweetInput.Click();
@@ -162,14 +168,28 @@ namespace Business.PageObjects
             switch (item)
             {
                 case "pic":
-                    Actions builder = new Actions(BrowserFactory.Driver);
-                    builder.SendKeys(addPicBtn, "path").Perform();
-                    BrowserFactory.SwitchToElement();
-                    builder.SendKeys(@"E:\Epam_training\picForTest.jpg");
-                    builder.SendKeys(Keys.Enter);
-                    // addPicBtn.SendKeys(System.IO.Path.GetFullPath(@"E:\Epam_training\picForTest.jpg"));
+                    //Actions builder = new Actions(BrowserFactory.Driver);
+                    //builder.SendKeys(addPicBtn, "path").Perform();
+                    //BrowserFactory.SwitchToElement();
+                    //builder.SendKeys(@"E:\Epam_training\picForTest.jpg");
+                    //builder.SendKeys(Keys.Enter);
+                    addPicBtn.SendKeys(System.IO.Path.GetFullPath(@"E:\Epam_training\picForTest.jpg"));
                     Extensions.WaitedForElement(BrowserFactory.Driver, sentTweetPicField, 5);
                    
+                    break;
+                case "several pics":
+                    if(pics.Count()!=0)
+                    {
+                        foreach (string image in pics)
+
+                        {
+                            addPicBtn.SendKeys(System.IO.Path.GetFullPath(image));
+                            Extensions.WaitedForElement(BrowserFactory.Driver, sentTweetPicField, 5);
+                        }
+                        
+                    }
+                   
+                    
                     break;
                 case "gif":
                     addGifBtn.Click();
@@ -194,15 +214,14 @@ namespace Business.PageObjects
            
             sendTweetBtn.Click();
             Extensions.WaitedForElementDisapear(BrowserFactory.Driver, By.XPath(popUpNewTweetPath), 10);
+            alertNewTweetAlert.Click();
         }
         public bool IsLastTweet(string message)
         {
-            Extensions.ScrollToTheBottom(BrowserFactory.Driver);
-            Extensions.ScrollToTheTop(BrowserFactory.Driver);
-            // string lastTweet = Collection[0].Text;
-            //allTweetsSection;
-            IList<IWebElement> list = allTweetsSection.FindElements(By.TagName("article"));
-            list[0].Click();
+            //Extensions.ScrollToTheBottom(BrowserFactory.Driver);
+            //Extensions.ScrollToTheTop(BrowserFactory.Driver);
+            //IList<IWebElement> list = allTweetsSection.FindElements(By.TagName("article"));           
+            //list[0].Click();            
             Extensions.WaitedForElement(BrowserFactory.Driver, singleTweet, 5); 
             if (message == singleTweet.Text)
             {

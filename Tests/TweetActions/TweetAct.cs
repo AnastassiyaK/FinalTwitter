@@ -3,6 +3,8 @@ using Business.TestBases;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,15 +35,26 @@ namespace Tests.TweetActions
         [TestCaseSource("Tweets")]
         public void SendTweets(string message,string item)
         {
-            BasePageObject.Main.SendTweet(message,item);
-            //string lastTweet = "kotik";
-            Assert.IsTrue(BasePageObject.Main.IsLastTweet(message),$"The last tweet is not {message}");
+            if (!(item == "several pics"))
+            {
+                BasePageObject.Main.SendTweet(message, item, null);
+                               
+            }
+            else
+            {
+                var fileName = ConfigurationManager.AppSettings["TweetPicPath"];
+                string[] images = Directory.GetFiles(fileName, "*.jpg");
+                BasePageObject.Main.SendTweet(message, item, images);
+
+            }
+            Assert.IsTrue(BasePageObject.Main.IsLastTweet(message), $"The last tweet is not {message}");
         }
         public static object[] Tweets =
         {
         //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","" },
         //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","gif" }
-        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","pic" }
+        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "pic" }
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "several pics" }
         //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","comment" }
         };
 
