@@ -19,16 +19,15 @@ namespace Business.PageObjects
         //{
         //}
         private static readonly FileLog log = new FileLog();
-
         private const string newTweetIputPath = "//span[contains(text(),'happening?')]";
         private const string popUpNewTweetPath = "//div[@aria-labelledby='modal-header']";
         private const string newTweetTextBoxPath = "//div[@data-testid='tweetTextarea_0']";
         private const string firstCommentTextBoxPath = "//div[@data-testid='tweetTextarea_1']";
         private const string sendTweetBtnPath = "//div[@data-testid='tweetButton']";
         private const string newPictureInputPath = "//div[contains(@id,'Tweetstorm-tweet-box-0')]/descendant::input[@class='file-input js-tooltip']";
-        private const string userIconPath = "//div[contains(@aria-label,'Profile')]";
+        private const string userIconPath = "//div[@data-testid='DashButton_ProfileIcon_Link']";
         private const string signOutBtnPath = "//a[@href='/logout']";
-        private const string homeLinkPath = "//nav[@aria-label='Primary']";
+        private const string homeLinkPath = "//a[@data-testid='AppTabBar_Home_Link']";
         private const string popUpLogOutPath= "//div[@data-testid='confirmationSheetConfirm']";
         private const string seeNewTweetBarPath = "//div[contains(@class,'new-tweets-bar')]";
         private const string allTweetsSectionPath = "//div[contains(@aria-label,'Home')]";
@@ -46,6 +45,13 @@ namespace Business.PageObjects
         private const string sentTweetPicPath="//div[@data-testid='tweetTextarea_0']//following::img[1]";
         private const string sentGifPath = "//div[@data-testid='tweetTextarea_0']//following::video[1]";
         private const string alertNewTweetPath = "//div[@data-testid='toast']";
+        private const string settingsUserPath = "//a[@href='/settings']";
+        private const string settingsLanguagePath = "//a[@href='/settings/language']";
+        private const string selectLanguagePath = "//select[@aria-label]";
+        private const string russianLanguagePath = "//select[@aria-label]//option[@value='ru']";
+        private const string englishLanguagePath = "//select[@aria-label]//option[@value='en']";
+        private const string confirmChangeLanguagePath = "//div[@data-testid='settingsDetailSave']";
+        //private const string ChangeLanguagePath = "//div[@data-testid='settingsDetailSave']//child::span[text()!='Save']";
 
         //home link on the page
         [FindsBy(How = How.XPath, Using = homeLinkPath)]
@@ -122,6 +128,27 @@ namespace Business.PageObjects
         //alert new tweet was sent
         [FindsBy(How = How.XPath, Using = alertNewTweetPath)]
         private IWebElement alertNewTweetAlert;
+        //users settings
+        [FindsBy(How = How.XPath, Using = settingsUserPath)]
+        private IWebElement settingsUserLink;
+        //change language link
+        [FindsBy(How = How.XPath, Using = settingsLanguagePath)]
+        private IWebElement settingsLanguageLink;
+        //selector language link
+        [FindsBy(How = How.XPath, Using = selectLanguagePath)]
+        private IWebElement selectLanguageBox;
+        //russian language
+        [FindsBy(How = How.XPath, Using = russianLanguagePath)]
+        private IWebElement russianLanguageOption;
+        //english language
+        [FindsBy(How = How.XPath, Using = englishLanguagePath)]
+        private IWebElement englishLanguageOption;
+        //english language
+        [FindsBy(How = How.XPath, Using = confirmChangeLanguagePath)]
+        private IWebElement confirmChangeLanguageBtn;
+        ////english save button
+        //[FindsBy(How = How.XPath, Using = confirmChangeLanguagePath)]
+        //private IWebElement confirmChangeLanguageBtn;
         
         //}
         //public bool OnPage()
@@ -238,8 +265,38 @@ namespace Business.PageObjects
             }
 
         }
+        public void ChangeLanguage(string language)
+        {
+            if (IsLoggedIn())
+            {
+                currentUserLink.Click();
+                settingsUserLink.Click();
+                settingsLanguageLink.Click();
+                selectLanguageBox.Click();
+                switch (language)
+                {
+                    case "ru":
+                        russianLanguageOption.Click();
+                        break;
+                    case "en":
+                        englishLanguageOption.Click();
+                        break;
+                    default:
+                        break;
+                }
+                confirmChangeLanguageBtn.Click();
+                Extensions.WaitedForElement(BrowserFactory.Driver, selectLanguageBox, 5);
+            }
 
+        }
 
+        public bool LanguageIsChanged()
+        {
+            string locator = confirmChangeLanguagePath + "//child::span[text()!='Save']";
+            return Extensions.WaitedForElementPresent(BrowserFactory.Driver, By.XPath(locator), 5);
+            //return true;
+        }
 
     }
+    
 }

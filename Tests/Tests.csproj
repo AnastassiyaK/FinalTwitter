@@ -63,6 +63,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SettingsChange\UserSettings.cs" />
     <Compile Include="TweetActions\TweetAct.cs" />
     <Compile Include="UserActions\UserLogIn.cs" />
   </ItemGroup>

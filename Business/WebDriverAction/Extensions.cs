@@ -74,6 +74,29 @@ namespace Business.WebDriverAction
             }
      
         }
+        public static bool WaitedForElementPresent(this IWebDriver driver, By locator, int timeoutInSeconds)
+        {
+            if (timeoutInSeconds > 0)
+            {
+                try
+                {
+                    var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                    // wait.Until(drv => drv.FindElement(By.XPath(path)));
+                    wait.Until(ExpectedConditions.ElementIsVisible(locator));
+                    //WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("submit")));
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+        }
         public static void TakeScreenShot(this IWebDriver driver, IWebElement element)
         {
             string pth = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
