@@ -19,28 +19,28 @@ namespace Business.PageObjects
         //{
         //}
         private static readonly FileLog log = new FileLog();
-        private const string newTweetIputPath = "//span[contains(text(),'happening?')]";
+        private const string newTweetIputPath = "//a[@href='/compose/tweet' and not(@data-testid)]";
         private const string popUpNewTweetPath = "//div[@aria-labelledby='modal-header']";
         private const string newTweetTextBoxPath = "//div[@data-testid='tweetTextarea_0']";
         private const string firstCommentTextBoxPath = "//div[@data-testid='tweetTextarea_1']";
         private const string sendTweetBtnPath = "//div[@data-testid='tweetButton']";
         private const string newPictureInputPath = "//div[contains(@id,'Tweetstorm-tweet-box-0')]/descendant::input[@class='file-input js-tooltip']";
         private const string userIconPath = "//div[@data-testid='DashButton_ProfileIcon_Link']";
-        private const string signOutBtnPath = "//a[@href='/logout']";
+        private const string signOutBtnPath = "//a[@data-testid='logout']";
         private const string homeLinkPath = "//a[@data-testid='AppTabBar_Home_Link']";
         private const string popUpLogOutPath= "//div[@data-testid='confirmationSheetConfirm']";
         private const string seeNewTweetBarPath = "//div[contains(@class,'new-tweets-bar')]";
-        private const string allTweetsSectionPath = "//div[contains(@aria-label,'Home')]";
+        private const string allTweetsSectionPath = "//div[@data-testid='primaryColumn']//section//h1]";
         private const string lastTweetsPath ="//div[contains(@aria-label,'Conversation')]//child::span";
         private const string singleTweetPath = "//div[@lang]";
-        private const string addPicBtnPath = "//div[contains(@aria-label,'photos')]//following::input[1]";
+        private const string addPicBtnPath = "//div[@data-testid='toolBar']//following::input[1][@accept]";
         private const string addGifBtnPath = "//div[contains(@aria-label,'GIF')] ";
-        private const string confirmGifBtnPath = "//span[text()='Add']";
-        private const string searchFieldGifPath = "//form[contains(@aria-label,'Search for GIFs')]//child::input";
-        private const string firstGifBtnPath = "//input[@aria-label='Auto-play GIFs']//following::img[1]";
+        private const string confirmGifBtnPath = "//div[@aria-labelledby='modal-header']//h2[@id='modal-header']//following::div[@role='button'][1]";
+        private const string searchFieldGifPath = "//form[contains(@aria-label,'GIF')]//input[@data-testid='SearchBox_Search_Input']";
+        private const string firstGifBtnPath = "//input[contains(@aria-label,'GIF')]//following::img[1]";
         private const string addCommentBtnPath = "//div[@aria-label='Add Tweet']";
         private const string optionMoreTweetBtnPath = "//div[@data-testid='caret']";
-        private const string deleteTweetBtnPath = "//span[text()='Delete']";
+        private const string deleteTweetBtnPath = "//div[@data-testid='pin']//following-sibling::div[@role='menuitem']";
         private const string confirmDeleteTweetBtnPath = "//div[@data-testid='confirmationSheetConfirm']";
         private const string sentTweetPicPath="//div[@data-testid='tweetTextarea_0']//following::img[1]";
         private const string sentGifPath = "//div[@data-testid='tweetTextarea_0']//following::video[1]";
@@ -203,7 +203,8 @@ namespace Business.PageObjects
                     //builder.SendKeys(Keys.Enter);
                     addPicBtn.SendKeys(System.IO.Path.GetFullPath(@"E:\Epam_training\GitProjectTwitter\Tests\PicsForTweet\picForTest.jpg"));
                     Extensions.WaitedForElement(BrowserFactory.Driver, sentTweetPicField, 5);
-                   
+                    Extensions.TakeScreenShot(BrowserFactory.Driver, sentTweetPicField);
+
                     break;
                 case "several pics":
                     if(pics.Count()!=0)
@@ -213,6 +214,7 @@ namespace Business.PageObjects
                         {
                             addPicBtn.SendKeys(System.IO.Path.GetFullPath(image));
                             Extensions.WaitedForElement(BrowserFactory.Driver, sentTweetPicField, 5);
+                            Extensions.TakeScreenShot(BrowserFactory.Driver, sentTweetPicField);
                         }
                         
                     }                

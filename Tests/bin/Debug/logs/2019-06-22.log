@@ -34,3 +34,24 @@
 2019-06-22 01:44:07.9734 | DEBUG | Core.FileLogs.FileLog | User is successfully logged in
 2019-06-22 01:44:11.4806 | DEBUG | Core.FileLogs.FileLog | User was signed out
 2019-06-22 01:44:12.0736 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-22 12:44:59.4215 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-22 12:45:07.2424 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: epamJune6
+2019-06-22 12:45:13.0093 | DEBUG | Core.FileLogs.FileLog | Sending Test Tweet Sat, 22 Jun 2019 12h44m53s as a new tweet
+2019-06-22 12:45:14.1374 | DEBUG | Core.FileLogs.FileLog | The Test Tweet Sat, 22 Jun 2019 12h44m53s was sent as tweet and the last tweet is .Checking for last tweet was successfull
+2019-06-22 12:45:15.4376 | DEBUG | Core.FileLogs.FileLog | User was signed out
+2019-06-22 12:45:15.8408 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-22 12:45:19.6134 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-22 12:45:24.9993 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: epamJune6
+2019-06-22 12:45:42.4564 | DEBUG | Core.FileLogs.FileLog | The Test Tweet Sat, 22 Jun 2019 12h44m53s was sent as tweet and the last tweet is .Checking for last tweet was successfull
+2019-06-22 12:45:43.0940 | DEBUG | Core.FileLogs.FileLog | User was signed out
+2019-06-22 12:45:43.5290 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-22 12:45:47.8228 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-22 12:45:52.5560 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: epamJune6
+2019-06-22 12:46:10.0878 | DEBUG | Core.FileLogs.FileLog | The Test Tweet Sat, 22 Jun 2019 12h44m53s was sent as tweet and the last tweet is .Checking for last tweet was successfull
+2019-06-22 12:46:10.9752 | DEBUG | Core.FileLogs.FileLog | User was signed out
+2019-06-22 12:46:11.5757 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
+2019-06-22 12:46:15.5616 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was initiated successfuly
+2019-06-22 12:46:20.1931 | DEBUG | Core.FileLogs.FileLog | Email: tweet2_test, password: epamJune6
+2019-06-22 12:46:44.2297 | DEBUG | Core.FileLogs.FileLog | The Test Tweet Sat, 22 Jun 2019 12h44m53s was sent as tweet and the last tweet is .Checking for last tweet was successfull
+2019-06-22 12:46:44.9584 | DEBUG | Core.FileLogs.FileLog | User was signed out
+2019-06-22 12:46:45.3249 | DEBUG | Core.FileLogs.FileLog | Browser Chrome was closed successfuly
