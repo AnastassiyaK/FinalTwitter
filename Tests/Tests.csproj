@@ -64,8 +64,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="SettingsChange\UserSettings.cs" />
+    <Compile Include="SetUp\SetUpClass.cs" />
     <Compile Include="TweetActions\TweetAct.cs" />
     <Compile Include="UserActions\UserLogIn.cs" />
+    <Compile Include="UserActions\UserMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj">

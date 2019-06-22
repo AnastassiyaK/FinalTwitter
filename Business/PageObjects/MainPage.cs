@@ -30,27 +30,33 @@ namespace Business.PageObjects
         private const string homeLinkPath = "//a[@data-testid='AppTabBar_Home_Link']";
         private const string popUpLogOutPath= "//div[@data-testid='confirmationSheetConfirm']";
         private const string seeNewTweetBarPath = "//div[contains(@class,'new-tweets-bar')]";
-        private const string allTweetsSectionPath = "//div[@data-testid='primaryColumn']//section//h1]";
-        private const string lastTweetsPath ="//div[contains(@aria-label,'Conversation')]//child::span";
-        private const string singleTweetPath = "//div[@lang]";
+        private const string allTweetsSectionPath = "//div[@data-testid='primaryColumn']";
+        private const string prefixSectionPath = "//article//time[@datetime]";
+        private const string lastTweetPath = "(//div[@data-testid='primaryColumn']//article//time[@datetime])[1]";
+        private const string singleTweetPath = "//div[@data-testid='primaryColumn']//article[@data-testid='tweetDetail']//div[@lang]//span";
+        private const string linkTweetPath = "//div[@data-testid='primaryColumn']//article[@data-testid='tweetDetail']//div[@lang]//span//following-sibling::a";
+        private const string firstcommentPath = "(//div[@data-testid='primaryColumn']//article//div[@data-testid='tweet'])[1]//div[@lang]//span";
         private const string addPicBtnPath = "//div[@data-testid='toolBar']//following::input[1][@accept]";
         private const string addGifBtnPath = "//div[contains(@aria-label,'GIF')] ";
         private const string confirmGifBtnPath = "//div[@aria-labelledby='modal-header']//h2[@id='modal-header']//following::div[@role='button'][1]";
         private const string searchFieldGifPath = "//form[contains(@aria-label,'GIF')]//input[@data-testid='SearchBox_Search_Input']";
         private const string firstGifBtnPath = "//input[contains(@aria-label,'GIF')]//following::img[1]";
-        private const string addCommentBtnPath = "//div[@aria-label='Add Tweet']";
+        private const string addCommentBtnPath = "//div[@data-testid='addButton']";
         private const string optionMoreTweetBtnPath = "//div[@data-testid='caret']";
-        private const string deleteTweetBtnPath = "//div[@data-testid='pin']//following-sibling::div[@role='menuitem']";
+        private const string deleteTweetBtnPath = "//div[@data-testid='pin']//following-sibling::div[@role='menuitem'][2]";
         private const string confirmDeleteTweetBtnPath = "//div[@data-testid='confirmationSheetConfirm']";
         private const string sentTweetPicPath="//div[@data-testid='tweetTextarea_0']//following::img[1]";
         private const string sentGifPath = "//div[@data-testid='tweetTextarea_0']//following::video[1]";
-        private const string alertNewTweetPath = "//div[@data-testid='toast']";
+        private const string alertNewTweetPath = "//div[@data-testid='toast']//a[@href]";
+        private const string alertPath = "//div[@data-testid='toast']";
         private const string settingsUserPath = "//a[@href='/settings']";
         private const string settingsLanguagePath = "//a[@href='/settings/language']";
         private const string selectLanguagePath = "//select[@aria-label]";
         private const string russianLanguagePath = "//select[@aria-label]//option[@value='ru']";
         private const string englishLanguagePath = "//select[@aria-label]//option[@value='en']";
         private const string confirmChangeLanguagePath = "//div[@data-testid='settingsDetailSave']";
+        private const string sectionChangeLanguagePath = "//section[@aria-labelledby='detail-header']";
+        private const string messagesPath = "//a[@data-testid='AppTabBar_DirectMessage_Link']";
         //private const string ChangeLanguagePath = "//div[@data-testid='settingsDetailSave']//child::span[text()!='Save']";
 
         //home link on the page
@@ -86,9 +92,6 @@ namespace Business.PageObjects
         //all tweets on the page of current user
         [FindsBy(How = How.XPath, Using = allTweetsSectionPath)]
         private IWebElement allTweetsSection;
-        //last tweet on page opened in new  window
-        [FindsBy(How = How.XPath, Using = lastTweetsPath)]
-        private IWebElement lastTweets;
         //single tweet 
         [FindsBy(How = How.XPath, Using = singleTweetPath)]
         private IWebElement singleTweet;
@@ -146,10 +149,23 @@ namespace Business.PageObjects
         //english language
         [FindsBy(How = How.XPath, Using = confirmChangeLanguagePath)]
         private IWebElement confirmChangeLanguageBtn;
-        ////english save button
-        //[FindsBy(How = How.XPath, Using = confirmChangeLanguagePath)]
-        //private IWebElement confirmChangeLanguageBtn;
+        //section languages
+        [FindsBy(How = How.XPath, Using = sectionChangeLanguagePath)]
+        private IWebElement sectionChangeLanguage;
+        //last tweet on page opened in new  window
+        [FindsBy(How = How.XPath, Using = lastTweetPath)]
+        private IWebElement lastTweetLink;
+        //first comment to the tweet
+        [FindsBy(How = How.XPath, Using = firstcommentPath)]
+        private IWebElement firstcommentLink;
+        //first link to the tweet
+        [FindsBy(How = How.XPath, Using = linkTweetPath)]
+        private IWebElement linkTweet;
+        //messages link
+        [FindsBy(How = How.XPath, Using = messagesPath)]
+        private IWebElement messagesLink;
         
+
         //}
         //public bool OnPage()
         //{
@@ -179,12 +195,17 @@ namespace Business.PageObjects
         public void LogOut()
         {
             currentUserLink.Click();
-            Extensions.WaitedForElement(BrowserFactory.Driver, userSignOutBtn, 5);
+            Extensions.WaitedForElement(BrowserFactory.Driver, userSignOutBtn, 5);            
             userSignOutBtn.Click();
             Extensions.WaitedForElement(BrowserFactory.Driver, userSignOutPopUpBtn, 5);
             userSignOutPopUpBtn.Click();
-            log.WriteMessagesInFile("User was signed out");
+            if(BasePageObject.Home.IsLogOut())
+            {
+                log.WriteMessagesInFile("User was signed out");
+            }
+            
         }
+        
         public void SendTweet(string message,string item,string [] pics)
         {
             Extensions.WaitedForElement(BrowserFactory.Driver, newTweetInput, 5);
@@ -204,7 +225,6 @@ namespace Business.PageObjects
                     addPicBtn.SendKeys(System.IO.Path.GetFullPath(@"E:\Epam_training\GitProjectTwitter\Tests\PicsForTweet\picForTest.jpg"));
                     Extensions.WaitedForElement(BrowserFactory.Driver, sentTweetPicField, 5);
                     Extensions.TakeScreenShot(BrowserFactory.Driver, sentTweetPicField);
-
                     break;
                 case "several pics":
                     if(pics.Count()!=0)
@@ -233,7 +253,7 @@ namespace Business.PageObjects
                 case "comment":
                     addCommentBtn.Click();
                     firstCommentTextBox.Click();
-                    firstCommentTextBox.SendKeys(message);
+                    firstCommentTextBox.SendKeys(message+$" {item}");
                     Extensions.WaitedForElement(BrowserFactory.Driver, sentTweetPicField, 5);
                     break;
                 default:                    
@@ -241,17 +261,19 @@ namespace Business.PageObjects
                     break;
 
             }
-           
+            log.WriteMessagesInFile($"Sending tweet with {item}");
             sendTweetBtn.Click();
             Extensions.WaitedForElementDisapear(BrowserFactory.Driver, By.XPath(popUpNewTweetPath), 10);
             alertNewTweetAlert.Click();
+            log.WriteMessagesInFile("Tweet was sent successfully");
         }
         public bool IsLastTweet(string message)
         {
-            //Extensions.ScrollToTheBottom(BrowserFactory.Driver);
-            //Extensions.ScrollToTheTop(BrowserFactory.Driver);
-            //IList<IWebElement> list = allTweetsSection.FindElements(By.TagName("article"));           
-            //list[0].Click();            
+            if (!singleTweet.Exists())
+            {
+                lastTweetLink.Click();
+            }
+                        
             Extensions.WaitedForElement(BrowserFactory.Driver, singleTweet, 5); 
             if (message == singleTweet.Text)
             {
@@ -261,7 +283,6 @@ namespace Business.PageObjects
             }
             else
             {
-
                 log.WriteMessagesInFile($"The {message} was sent as tweet and the last tweet is .Something went wrong");
                 return false;
             }
@@ -271,9 +292,15 @@ namespace Business.PageObjects
         {
             if (IsLoggedIn())
             {
-                currentUserLink.Click();
-                settingsUserLink.Click();
-                settingsLanguageLink.Click();
+                if (!(sectionChangeLanguage.Exists()))
+                {
+                    currentUserLink.Click();
+                    settingsUserLink.Click();
+                    Extensions.WaitedForElement(BrowserFactory.Driver, settingsLanguageLink, 5);
+                    settingsLanguageLink.Click();
+                }
+
+                Extensions.WaitedForElement(BrowserFactory.Driver, selectLanguageBox, 5);
                 selectLanguageBox.Click();
                 switch (language)
                 {
@@ -286,17 +313,136 @@ namespace Business.PageObjects
                     default:
                         break;
                 }
+                Extensions.WaitedForElement(BrowserFactory.Driver, sectionChangeLanguage, 5);
+                Extensions.WaitedForElement(BrowserFactory.Driver, confirmChangeLanguageBtn, 5);
                 confirmChangeLanguageBtn.Click();
-                Extensions.WaitedForElement(BrowserFactory.Driver, selectLanguageBox, 5);
+                //Extensions.ScrollToTheBottom(BrowserFactory.Driver);
+                ////Extensions.ScrollToTheTop(BrowserFactory.Driver);
+                //Extensions.WaitedForElementPresent(BrowserFactory.Driver, By.XPath("//a[@href='/settings/about']"), 10);
             }
+        }
+        public bool IsComment(string message)
+        {
+            OpenLastTweet();
+            Extensions.WaitedForElement(BrowserFactory.Driver, firstcommentLink, 5);
+            if (message==firstcommentLink.Text)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+        public bool IsCorrectLink(string message,string item)
+        {
+            OpenLastTweet();
+            string url = linkTweet.GetAttribute("title");
+            BrowserFactory.OpenNewTab();
+            BrowserFactory.GoToUrl(url);
+            log.WriteMessagesInFile($"New tab is opened with url {url}");
+            switch(item)
+            {
+                case "correct link":
+                    if (url == BrowserFactory.Driver.Url)
+                    {
+                        if (BasePageObject.FacebookHome.HomePageIsOpened())
+                        {
+                            BrowserFactory.CloseTab();
+                            log.WriteMessagesInFile($"New tab is closed with url {url}");
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                default:
+                     string path = "//div[@id='suggestions-list']//following-sibling::div[@class='error-code']";
+                     log.WriteMessagesInFile($"The link {url} was incorrect");
+                     Extensions.WaitedForElementPresent(BrowserFactory.Driver, By.XPath(path), 10);
+                     BrowserFactory.CloseTab();
+                     return false;               
+
+
+            }
+
+
+        }
+        public void OpenLastTweet()
+        {
+            if (!singleTweet.Exists())
+            {
+                lastTweetLink.Click();
+            }
+            Extensions.WaitedForElement(BrowserFactory.Driver, singleTweet, 5);
 
         }
 
-        public bool LanguageIsChanged()
+        public bool TweetIsDeleted(string message)
+        {
+            SendTweet(message, "", null);
+            Extensions.WaitedForElement(BrowserFactory.Driver, singleTweet, 5);
+            optionMoreTweetBtn.Click();            
+            deleteTweetBtn.Click();
+            Extensions.WaitedForElement(BrowserFactory.Driver, confirmDeleteTweetBtn, 10);
+            confirmDeleteTweetBtn.Click();
+            if (Extensions.WaitedForElementPresent(BrowserFactory.Driver, By.XPath(alertPath), 10))
+            {
+                log.WriteMessagesInFile("Tweet was deleted successfully");
+                return true;
+            }
+            else
+            {
+                log.WriteMessagesInFile("Tweet was not deleted. Smth went wrong");
+                return false;
+            }                
+
+        }
+        //public bool TweetIsDeleted(string message)
+        //{
+        //    int number = 1;           
+        //    List<int> tweets = new List<int>();
+        //    for(int i =0;i<number;i++)
+        //    {
+        //        string tweet = prefixSectionPath + $"[{number}]";
+        //        if (Extensions.WaitedForElementPresent(BrowserFactory.Driver, By.XPath(""), 10))
+        //        {
+        //            tweets.Add(number);
+        //        }
+        //        number++;
+        //    }
+            
+           
+        //    return true;
+        //}
+        public bool LanguageIsChanged(string language)
         {
             string locator = confirmChangeLanguagePath + "//child::span[text()!='Save']";
-            return Extensions.WaitedForElementPresent(BrowserFactory.Driver, By.XPath(locator), 5);
-            //return true;
+            //log.WriteMessagesInFile($"Changing language in User settings to {language}");
+            switch (language)
+            {
+                case "ru":
+                    if (Extensions.WaitedForElementPresent(BrowserFactory.Driver, By.XPath(locator), 5))
+                    {
+                        log.WriteMessagesInFile($"Language in User settings is changed to {language}");
+                        return true;
+                    }
+                    return false;
+                default:
+                    if (Extensions.WaitedForElementPresent(BrowserFactory.Driver, By.XPath(confirmChangeLanguagePath), 10))
+                    log.WriteMessagesInFile($"Language in User settings is changed to {language}");
+                    homeLink.Click();
+                    return true;
+                    
+            }
+ 
         }
 
     }

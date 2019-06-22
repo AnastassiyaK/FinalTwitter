@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Core.FileLogs;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ using System.Threading.Tasks;
 namespace Business.WebDriverAction
 {
     public static class Extensions
-    {   
+    {
+        private static readonly FileLog log = new FileLog();
         //check if any WebElement is displayed on the page (for tests)
         public static bool Exists(this IWebElement element)
         {
@@ -33,9 +35,7 @@ namespace Business.WebDriverAction
                 try
                 {
                     var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
-                    // wait.Until(drv => drv.FindElement(By.XPath(path)));
                     wait.Until(ExpectedConditions.ElementToBeClickable(element));
-                    //WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("submit")));
                     return true;
                 }
                 catch(Exception e)
@@ -48,8 +48,6 @@ namespace Business.WebDriverAction
                 return false;
             }
            
-
-
         }
         public static bool WaitedForElementDisapear(this IWebDriver driver, By locator, int timeoutInSeconds)
         {
@@ -58,9 +56,7 @@ namespace Business.WebDriverAction
                 try
                 {
                     var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
-                    // wait.Until(drv => drv.FindElement(By.XPath(path)));
                     wait.Until(ExpectedConditions.InvisibilityOfElementLocated(locator));
-                    //WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("submit")));
                     return true;
                 }
                 catch (Exception e)
@@ -81,9 +77,7 @@ namespace Business.WebDriverAction
                 try
                 {
                     var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
-                    // wait.Until(drv => drv.FindElement(By.XPath(path)));
                     wait.Until(ExpectedConditions.ElementIsVisible(locator));
-                    //WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("submit")));
                     return true;
                 }
                 catch (Exception e)
@@ -110,7 +104,17 @@ namespace Business.WebDriverAction
             Rectangle croppedImage = new Rectangle(element.Location.X, element.Location.Y, element.Size.Width,element.Size.Height);
             screenshot = screenshot.Clone(croppedImage, screenshot.PixelFormat);
             //screenshot.Save(String.Format(fileName,ImageFormat.Jpeg));
-            screenshot.Save(Path.Combine(projectPath, fileName),ImageFormat.Jpeg);
+            try
+            {
+                screenshot.Save(Path.Combine(projectPath, fileName), ImageFormat.Jpeg);
+                log.WriteMessagesInFile($"Sreenshot was taken for element {element.TagName}");
+            }
+            catch(Exception e)
+            {
+                log.WriteMessagesInFile($"Sreenshot was not taken for element {element.TagName}");
+                throw;
+            }
+           
             //screenshot.Save(@"E:\Epam_training\GitProjectFinal\Tests\Screenshots"+DateTime.Now.ToString("yyyy-mm-dd HH:mm:ss") + ".jpg", ImageFormat.Jpeg);
 
         }

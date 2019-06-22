@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Tests.SetUp;
 
 namespace Tests.UserActions
 {
@@ -87,7 +88,9 @@ namespace Tests.UserActions
                 BasePageObject.Login.SignIn(method);
                 Assert.IsTrue(BasePageObject.Main.IsLoggedIn(), "User is not logged in");
                 BasePageObject.Main.LogOut();
+                //Assert.IsTrue(BasePageObject.Home.IsLoggedOut(), "User is not logged out");
                 Assert.IsTrue(BasePageObject.Home.IsLoggedOut(), "User is not logged out");
+
             }
             else
             {

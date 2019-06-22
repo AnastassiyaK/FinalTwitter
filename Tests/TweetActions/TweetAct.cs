@@ -8,27 +8,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tests.SetUp;
 
 namespace Tests.TweetActions
 {
     [TestFixture]
-    class TweetAct: TestBase
+    class TweetAct: SetUpClass
     {
-        [SetUp]
-        public static void LogIn()
-        {
-            //Cred
-            //UserActions.UserLogIn.Cred;
-            //tweet2_test", "epamJune6"
-            BasePageObject.Login.SignIn("LogInCorrectCreds");
-        }
-
-        [TearDown]
-        public static void LogOut()
-        {
-            BasePageObject.Main.LogOut();
-        }
-
         [Test]
         [Order(1)]
         [Description("Sending tweets with text, text and correct link, text and incorrect link")]
@@ -58,22 +44,43 @@ namespace Tests.TweetActions
 
                     }
 
-                }   
-                            
+                }                             
                 
-
             }
-            Assert.IsTrue(BasePageObject.Main.IsLastTweet(message), $"The last tweet is not {message}");
+            //Assert.IsTrue(BasePageObject.Main.IsLastTweet(message), $"The last tweet is not {message}");
+            if(item=="comment")
+            {
+                Assert.IsTrue(BasePageObject.Main.IsComment(message+$" {item}"), $"The last tweet is not {message}");
+            }
+            if (item == "correct link")
+            {
+                Assert.IsTrue(BasePageObject.Main.IsCorrectLink(message + $" {item}",item), $"The last tweet is not {message}");
+            }
+            if (item == "incorrect link")
+            {
+                Assert.IsFalse(BasePageObject.Main.IsCorrectLink(message + $" {item}",item), $"The last tweet is not {message}");
+            }
+
         }
+
+        [Test]
+        [Order(2)]
+        [Description("Sending tweets with text, text and correct link, text and incorrect link")]
+        public void DeleteTweet()
+        {
+            string tweet = $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}";
+            Assert.IsTrue(BasePageObject.Main.TweetIsDeleted(tweet), "Tweet was not deleted");
+        }
+
         public static object[] Tweets =
         {
-        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","" },
-        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","gif" },
-        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "pic" },
-        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "several pics" }
+        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","" },
+        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","gif" },
+        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "pic" },
+        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "several pics" }
         //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","comment" },
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","correct link" },
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","incorrect link" }
+        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")} https://www.facebook.com/","correct link" }
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")} https://vk1.com/","incorrect link" }
         };
 
         //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}"};

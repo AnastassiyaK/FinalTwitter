@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,17 @@ namespace Business.PageObjects
                 log.WriteMessagesInFile("User is not logged out");
                 return false;
             }
+
+        }
+        public bool IsLogOut()
+        {
+            BrowserFactory.GoToUrl(ConfigurationManager.AppSettings["UrlHome"]);
+            if (ConfigurationManager.AppSettings["UrlHome"] == BrowserFactory.Driver.Url)
+            {
+                return true;
+            }
+            log.WriteMessagesInFile("User was NOT signed out.Smth went wrong");
+            return false;
 
         }
 

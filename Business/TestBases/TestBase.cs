@@ -14,8 +14,7 @@ using static Core.WebDrivers.BrowserFactory;
 
 namespace Business.TestBases
 {
-    [TestFixture]
-    public class TestBase
+    public abstract class TestBase
     {
         public static WebBrowser browser;
         private static FileLog log = new FileLog();

@@ -141,7 +141,20 @@ namespace Core.WebDrivers
                 }
             }
         }
-            public enum WebBrowser
+        public static void OpenNewTab()
+        {
+            //driver.FindElement(By.CssSelector("body")).SendKeys(Keys.Control + "t");
+            ((IJavaScriptExecutor)driver).ExecuteScript("window.open();");
+            driver.SwitchTo().Window(driver.WindowHandles.Last());
+
+        }
+        public static void CloseTab()
+        {
+            driver.Close();
+            driver.SwitchTo().Window(driver.WindowHandles.Last());
+
+        }
+        public enum WebBrowser
         {
             //if need to execute test in different browsers
             //IE,

@@ -60,9 +60,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageObjects\BasePageObject.cs" />
+    <Compile Include="PageObjects\FacebookLoginPage.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="PageObjects\LoginPage.cs" />
     <Compile Include="PageObjects\MainPage.cs" />
+    <Compile Include="PageObjects\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestBases\TestBase.cs" />
     <Compile Include="TestDataAccess\ExcelDataAccess.cs" />

@@ -35,6 +35,12 @@ namespace Business.PageObjects
         public static HomePage Home
         { get => GetPage<HomePage>(); }
 
+        public static FacebookLoginPage FacebookHome
+        { get => GetPage<FacebookLoginPage>(); }
+
+        public static Message Message
+        { get => GetPage<Message>(); }
+
 
 
     }
