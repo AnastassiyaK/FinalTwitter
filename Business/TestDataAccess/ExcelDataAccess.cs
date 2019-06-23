@@ -24,11 +24,27 @@ namespace Tests.TestDataAccess
             using (var connection = new OleDbConnection(TestDataFileConnection()))
             {
                 connection.Open();
-                var query = string.Format("select * from [DataSet$] where method='{0}'", keyName);
-                var value = connection.Query<UserData>(query).FirstOrDefault();
+                var query = string.Format("select * from [DataSet$] where method=@method");
+                var value = connection.Query<UserData>(query,new { method = keyName }).FirstOrDefault();
                 connection.Close();
                 return value;
             }
         }
+        public static Dictionary<string,string> GetUsersName(List<string> keyName)
+        {
+            
+            using (var connection = new OleDbConnection(TestDataFileConnection()))
+            {
+                connection.Open();
+                var query = string.Format("select method as [Key],login as [Value] from [DataSet$] where method IN @Methods");
+                var value = connection.Query<KeyValuePair<string, string>>(query, new { Methods = keyName})
+                .ToDictionary(pair => pair.Key, pair => pair.Value);
+                connection.Close();
+                return value;
+                
+            }
+
+        }
+
     }
 }

@@ -24,7 +24,15 @@ namespace Tests.TweetActions
             if (!(item == "several pics") && !(item == "pic"))
             {
                 BasePageObject.Main.SendTweet(message, item, null);
-                               
+                if(!(item == "correct link") && !(item == "incorrect link"))
+                {
+                    Assert.IsTrue(BasePageObject.Main.IsLastTweet(message, true), $"The last tweet is not {message}");
+                }
+                else
+                {
+                    Assert.IsTrue(BasePageObject.Main.IsLastTweet(message, false), $"The last tweet is not {message}");
+                }
+                
             }
             else
             {
@@ -44,21 +52,25 @@ namespace Tests.TweetActions
 
                     }
 
-                }                             
-                
+                }
+                Assert.IsTrue(BasePageObject.Main.IsLastTweet(message,true), $"The last tweet is not {message}");
+
             }
             //Assert.IsTrue(BasePageObject.Main.IsLastTweet(message), $"The last tweet is not {message}");
             if(item=="comment")
             {
+                
                 Assert.IsTrue(BasePageObject.Main.IsComment(message+$" {item}"), $"The last tweet is not {message}");
             }
             if (item == "correct link")
             {
-                Assert.IsTrue(BasePageObject.Main.IsCorrectLink(message + $" {item}",item), $"The last tweet is not {message}");
+               
+                Assert.IsTrue(BasePageObject.Main.IsCorrectLink(message,item), $"The last tweet is not {message}");
             }
             if (item == "incorrect link")
             {
-                Assert.IsFalse(BasePageObject.Main.IsCorrectLink(message + $" {item}",item), $"The last tweet is not {message}");
+                
+                Assert.IsFalse(BasePageObject.Main.IsCorrectLink(message,item), $"The last tweet is not {message}");
             }
 
         }
@@ -74,12 +86,12 @@ namespace Tests.TweetActions
 
         public static object[] Tweets =
         {
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","" },
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","gif" },
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "pic" },
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "several pics" }
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","comment" },
-        //new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")} https://www.facebook.com/","correct link" }
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","" },
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","gif" },
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "pic" },
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}", "several pics" },
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")}","comment" },
+        new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")} https://www.facebook.com/","correct link" },
         new object[] { $"Test Tweet {DateTime.Now.ToString("ddd, dd MMM yyy HH'h'mm'm'ss's'")} https://vk1.com/","incorrect link" }
         };
 

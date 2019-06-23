@@ -37,8 +37,8 @@ namespace Business.PageObjects
         }
         public bool IsLogOut()
         {
-            BrowserFactory.GoToUrl(ConfigurationManager.AppSettings["UrlHome"]);
-            if (ConfigurationManager.AppSettings["UrlHome"] == BrowserFactory.Driver.Url)
+            BrowserFactory.GoToUrl(ConfigurationManager.AppSettings["Url"]);
+            if (ConfigurationManager.AppSettings["Url"] == BrowserFactory.Driver.Url)
             {
                 return true;
             }

@@ -33,7 +33,7 @@ namespace Business.PageObjects
         private const string allTweetsSectionPath = "//div[@data-testid='primaryColumn']";
         private const string prefixSectionPath = "//article//time[@datetime]";
         private const string lastTweetPath = "(//div[@data-testid='primaryColumn']//article//time[@datetime])[1]";
-        private const string singleTweetPath = "//div[@data-testid='primaryColumn']//article[@data-testid='tweetDetail']//div[@lang]//span";
+        private const string singleTweetPath = "(//div[@data-testid='primaryColumn']//article[@data-testid='tweetDetail']//div[@lang]//span)[1]";
         private const string linkTweetPath = "//div[@data-testid='primaryColumn']//article[@data-testid='tweetDetail']//div[@lang]//span//following-sibling::a";
         private const string firstcommentPath = "(//div[@data-testid='primaryColumn']//article//div[@data-testid='tweet'])[1]//div[@lang]//span";
         private const string addPicBtnPath = "//div[@data-testid='toolBar']//following::input[1][@accept]";
@@ -61,109 +61,144 @@ namespace Business.PageObjects
 
         //home link on the page
         [FindsBy(How = How.XPath, Using = homeLinkPath)]
-        private IWebElement homeLink;       
+        private IWebElement homeLink;    
+        
         //button to enter text
         [FindsBy(How = How.XPath, Using = newTweetIputPath)]
         private IWebElement newTweetInput;
+
         //new tweet area
         [FindsBy(How = How.XPath, Using = newTweetTextBoxPath)]
         private IWebElement newTweetTextBox;
+
         //first comment to the tweet area
         [FindsBy(How = How.XPath, Using = firstCommentTextBoxPath)]
         private IWebElement firstCommentTextBox;
+
         //button to send tweet
         [FindsBy(How = How.XPath, Using = sendTweetBtnPath)]
         private IWebElement sendTweetBtn;
+
         //input to send a pic
         [FindsBy(How = How.XPath, Using = newPictureInputPath)]
         private IWebElement sendPicInput;
+
         //user profile link
         [FindsBy(How = How.XPath, Using = userIconPath)]
         private IWebElement currentUserLink;
+
         //sign out button
         [FindsBy(How = How.XPath, Using = signOutBtnPath)]
         private IWebElement userSignOutBtn;
+
         //modal window for sign out    
         [FindsBy(How = How.XPath, Using = popUpLogOutPath)]
         private IWebElement userSignOutPopUpBtn;
+
         //pop up "new tweet" NOT USED
         [FindsBy(How = How.XPath, Using = seeNewTweetBarPath)]
         private IWebElement seeNewTweetBarBtn;
+
         //all tweets on the page of current user
         [FindsBy(How = How.XPath, Using = allTweetsSectionPath)]
         private IWebElement allTweetsSection;
+
         //single tweet 
         [FindsBy(How = How.XPath, Using = singleTweetPath)]
         private IWebElement singleTweet;
+
         //send pic button
         [FindsBy(How = How.XPath, Using = addPicBtnPath)]
         private IWebElement addPicBtn;
+
         //send gif button
         [FindsBy(How = How.XPath, Using = addGifBtnPath)]
         private IWebElement addGifBtn;
+
         //search gifs field
         [FindsBy(How = How.XPath, Using =searchFieldGifPath)]
         private IWebElement searchFieldGif;
+
         //first gif 
         [FindsBy(How = How.XPath, Using = firstGifBtnPath)]
         private IWebElement firstGifBtn;
+
         //add comment 
         [FindsBy(How = How.XPath, Using = addCommentBtnPath)]
         private IWebElement addCommentBtn;
+
         //option more on tweet
         [FindsBy(How = How.XPath, Using = optionMoreTweetBtnPath)]
         private IWebElement optionMoreTweetBtn;
+
         //delete btn in tweet menu
         [FindsBy(How = How.XPath, Using = deleteTweetBtnPath)]
         private IWebElement deleteTweetBtn;
+
         //confirm delete btn in tweet menu
         [FindsBy(How = How.XPath, Using = confirmDeleteTweetBtnPath)]
         private IWebElement confirmDeleteTweetBtn;
+
         //sent pic 
         [FindsBy(How = How.XPath, Using = sentTweetPicPath)]
         private IWebElement sentTweetPicField;
+
         //sent gif
         [FindsBy(How = How.XPath, Using = sentGifPath)]
         private IWebElement sentGifField;        
+
         //confirm gif 
         [FindsBy(How = How.XPath, Using = confirmGifBtnPath)]
         private IWebElement confirmGifBtn;
+
         //alert new tweet was sent
         [FindsBy(How = How.XPath, Using = alertNewTweetPath)]
         private IWebElement alertNewTweetAlert;
+
         //users settings
         [FindsBy(How = How.XPath, Using = settingsUserPath)]
         private IWebElement settingsUserLink;
+
         //change language link
         [FindsBy(How = How.XPath, Using = settingsLanguagePath)]
         private IWebElement settingsLanguageLink;
+
         //selector language link
         [FindsBy(How = How.XPath, Using = selectLanguagePath)]
         private IWebElement selectLanguageBox;
+
         //russian language
         [FindsBy(How = How.XPath, Using = russianLanguagePath)]
         private IWebElement russianLanguageOption;
+
         //english language
         [FindsBy(How = How.XPath, Using = englishLanguagePath)]
         private IWebElement englishLanguageOption;
+
         //english language
         [FindsBy(How = How.XPath, Using = confirmChangeLanguagePath)]
         private IWebElement confirmChangeLanguageBtn;
+
         //section languages
         [FindsBy(How = How.XPath, Using = sectionChangeLanguagePath)]
         private IWebElement sectionChangeLanguage;
+
         //last tweet on page opened in new  window
         [FindsBy(How = How.XPath, Using = lastTweetPath)]
         private IWebElement lastTweetLink;
+
         //first comment to the tweet
         [FindsBy(How = How.XPath, Using = firstcommentPath)]
         private IWebElement firstcommentLink;
+
         //first link to the tweet
         [FindsBy(How = How.XPath, Using = linkTweetPath)]
         private IWebElement linkTweet;
+
         //messages link
         [FindsBy(How = How.XPath, Using = messagesPath)]
         private IWebElement messagesLink;
+
         
 
         //}
@@ -199,6 +234,7 @@ namespace Business.PageObjects
             userSignOutBtn.Click();
             Extensions.WaitedForElement(BrowserFactory.Driver, userSignOutPopUpBtn, 5);
             userSignOutPopUpBtn.Click();
+            Extensions.WaitedForElementDisapear(BrowserFactory.Driver, By.XPath(popUpLogOutPath), 10);
             if(BasePageObject.Home.IsLogOut())
             {
                 log.WriteMessagesInFile("User was signed out");
@@ -267,25 +303,46 @@ namespace Business.PageObjects
             alertNewTweetAlert.Click();
             log.WriteMessagesInFile("Tweet was sent successfully");
         }
-        public bool IsLastTweet(string message)
+        public bool IsLastTweet(string message,bool link)
         {
+            
             if (!singleTweet.Exists())
             {
                 lastTweetLink.Click();
             }
                         
-            Extensions.WaitedForElement(BrowserFactory.Driver, singleTweet, 5); 
-            if (message == singleTweet.Text)
+            Extensions.WaitedForElement(BrowserFactory.Driver, singleTweet, 5);
+            if (link)
             {
-                log.WriteMessagesInFile($"The {message} was sent as tweet and the last tweet is .Checking for last tweet was successfull");
+                if (message == singleTweet.Text)
+                {
+                    log.WriteMessagesInFile($"The {message} was sent as tweet and the last tweet is .Checking for last tweet was successfull");
 
-            return true;
+                    return true;
+                }
+                else
+                {
+                    log.WriteMessagesInFile($"The {message} was sent as tweet and the last tweet is .Something went wrong");
+                    return false;
+                }
             }
             else
             {
-                log.WriteMessagesInFile($"The {message} was sent as tweet and the last tweet is .Something went wrong");
-                return false;
+                var a = singleTweet.Text + linkTweet.GetAttribute("title");
+                if (message == (singleTweet.Text+linkTweet.GetAttribute("title")))
+                {
+                    log.WriteMessagesInFile($"The {message} was sent as tweet and the last tweet is .Checking for last tweet was successfull");
+
+                    return true;
+                }
+                else
+                {
+                    log.WriteMessagesInFile($"The {message} was sent as tweet and the last tweet is .Something went wrong");
+                    return false;
+                }                
+                
             }
+           
 
         }
         public void ChangeLanguage(string language)
@@ -316,6 +373,7 @@ namespace Business.PageObjects
                 Extensions.WaitedForElement(BrowserFactory.Driver, sectionChangeLanguage, 5);
                 Extensions.WaitedForElement(BrowserFactory.Driver, confirmChangeLanguageBtn, 5);
                 confirmChangeLanguageBtn.Click();
+                Extensions.WaitedForElement(BrowserFactory.Driver, sectionChangeLanguage, 10);
                 //Extensions.ScrollToTheBottom(BrowserFactory.Driver);
                 ////Extensions.ScrollToTheTop(BrowserFactory.Driver);
                 //Extensions.WaitedForElementPresent(BrowserFactory.Driver, By.XPath("//a[@href='/settings/about']"), 10);

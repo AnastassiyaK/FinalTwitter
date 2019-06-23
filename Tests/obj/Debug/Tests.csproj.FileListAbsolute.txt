@@ -82,3 +82,4 @@ E:\Epam_training\GitProjectTwitter\Tests\obj\Debug\Tests.csproj.CoreCompileInput
 E:\Epam_training\GitProjectTwitter\Tests\obj\Debug\Tests.csproj.CopyComplete
 E:\Epam_training\GitProjectTwitter\Tests\obj\Debug\Tests.dll
 E:\Epam_training\GitProjectTwitter\Tests\obj\Debug\Tests.pdb
+E:\Epam_training\GitProjectTwitter\Tests\bin\Debug\NLog.config
